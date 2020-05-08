@@ -6,7 +6,7 @@ from spotify import SpotifyControllerException, SpotifyController
 class TunesBar(rumps.App):
 
     def __init__(self, name, icon):
-        super(TunesBar, self).__init__(name, icon=icon, quit_button=None)
+        super(TunesBar, self).__init__(name="TunesBar", icon="resources/app_icon.png", quit_button=None)
         self.full_menu = [rumps.MenuItem("▶️ Play", callback=self.play),
                      rumps.MenuItem("⏩ Next", callback=self.next),
                      rumps.MenuItem("⏪ Prev", callback=self.prev),
@@ -18,7 +18,7 @@ class TunesBar(rumps.App):
                     rumps.MenuItem("Show"),
                     None,
                     rumps.MenuItem("Quit", callback=self.quit)]
-        self.closed_menu = [rumps.MenuItem("Open Spotify", icon='sp_icon.png', callback=self.start_spotify),
+        self.closed_menu = [rumps.MenuItem("Open Spotify", icon='resources/sp_icon.png', callback=self.start_spotify),
                             None,
                             rumps.MenuItem("Quit", callback=self.quit)]
         self.menu = self.full_menu
@@ -66,10 +66,3 @@ class TunesBar(rumps.App):
         self.sp.quit()
         rumps.quit_application()
 
-    
-
-
-if __name__ == "__main__":
-    rumps.debug_mode(True)
-    tb = TunesBar(name="TunesBar", icon = 'app_icon.png')
-    tb.run()

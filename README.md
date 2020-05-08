@@ -14,4 +14,4 @@ Control Spotify playback, and show window if minimised or hidden:
 
 ----
 ## Coming Soon
-- Spotify broke the Applescript bindings in the latest desktop app release. So once this is fixed, TunesBar will be update to show track information and artwork
+- Spotify broke the Applescript bindings in the latest desktop app release. So once this is fixed, TunesBar will be updated to optionally show track information and artwork.
