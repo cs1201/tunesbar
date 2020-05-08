@@ -39,6 +39,10 @@ class SpotifyController:
     def toggle_playing(self):
         self._run_script(as_toggle_play)
 
+    def show(self):
+        self._run_script(as_show)
+        print("ran as_show")
+
     def quit(self):
         self._run_script(as_quit)
 

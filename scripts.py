@@ -55,3 +55,14 @@ as_quit = """
             end if
             set return to true
           """
+
+as_show = """
+            tell application "Finder"
+                set foremost to true
+            end tell
+            tell application "Spotify"
+	            activate
+                set minituarized to false
+	            set foremost to true
+            end tell
+          """
