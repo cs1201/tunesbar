@@ -8,8 +8,8 @@ Usage:
 from setuptools import setup
 
 APP = ['__init__.py']
-DATA_FILES = ['resources/']
-OPTIONS = {}
+DATA_FILES = ['AppIcon.icns', 'resources/']
+OPTIONS = {'iconfile':'AppIcon.icns'}
 
 setup(
     name="TunesBar",

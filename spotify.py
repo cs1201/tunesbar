@@ -8,8 +8,6 @@ class SpotifyController:
     def __init__(self):
         if not self._run_script(as_check_installed):
             raise SpotifyControllerException("Spotify not found on system")
-        else:
-            print("Spotify found on system")
 
     @property
     def is_open(self):
