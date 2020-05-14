@@ -1,18 +1,21 @@
 import applescript
-from scripts import *
+from scripts import SpotifyAppleScripts
+
 
 class SpotifyControllerException(Exception):
     pass
 
+
 class SpotifyController:
     def __init__(self):
-        if not self._run_script(as_check_installed):
+        self.scripts = SpotifyAppleScripts()
+        if not self._run_script(self.scripts.check_installed):
             raise SpotifyControllerException("Spotify not found on system")
 
     @property
     def is_open(self):
-        if self._run_script(as_check_running):
-            self.__is_open =  True
+        if self._run_script(self.scripts.check_running):
+            self.__is_open = True
         else:
             self.__is_open = False
 
@@ -20,29 +23,30 @@ class SpotifyController:
 
     @property
     def is_playing(self):
-        self.__is_playing = self._run_script(as_check_playing)
+        self.__is_playing = self._run_script(self.scripts.check_playing)
         return self.__is_playing
 
     def next_track(self):
-        self._run_script(as_next_track)
+        self._run_script(self.scripts.next_track)
         self.is_playing
 
     def prev_track(self):
-        self._run_script(as_prev_track)
+        self._run_script(self.scripts.prev_track)
         self.is_playing
 
     def start_spotify(self):
-        self.__is_open = self._run_script(as_start_spotify)
+        self.__is_open = self._run_script(self.scripts.start_spotify)
 
     def toggle_playing(self):
-        self._run_script(as_toggle_play)
+        print("telling spotify to play")
+        self._run_script(self.scripts.toggle_play)
 
     def show(self):
-        self._run_script(as_show)
-        print("ran as_show")
+        self._run_script(self.scripts.show)
+        print("ran self.scripts.show")
 
     def quit(self):
-        self._run_script(as_quit)
+        self._run_script(self.scripts._quit)
 
     def _run_script(self, script):
         rtn = applescript.run(script)
@@ -52,7 +56,6 @@ class SpotifyController:
             return False
         else:
             raise SpotifyControllerException("Error: unrecognised spotify OSA response")
-
 
 
 if __name__ == "__main__":

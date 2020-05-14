@@ -9,7 +9,7 @@ from setuptools import setup
 
 APP = ['__init__.py']
 DATA_FILES = ['AppIcon.icns', 'resources/']
-OPTIONS = {'iconfile':'resources/AppIcon.icns'}
+OPTIONS = {'iconfile': 'resources/AppIcon.icns'}
 
 setup(
     name="TunesBar",
@@ -17,5 +17,5 @@ setup(
     app=APP,
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
-    setup_requires=['py2app'],
+    setup_requires=['py2app']
 )

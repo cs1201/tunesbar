@@ -1,30 +1,34 @@
 import rumps
-import applescript
-from scripts import *
 from spotify import SpotifyControllerException, SpotifyController
+
 
 class TunesBar(rumps.App):
 
     def __init__(self, name, icon):
-        super(TunesBar, self).__init__(name="TunesBar", icon="resources/app_icon.png", quit_button=None)
+        super(TunesBar, self).__init__(name="TunesBar",
+                                       icon="resources/app_icon.png",
+                                       quit_button=None)
         self.full_menu = [rumps.MenuItem("▶️ Play", callback=self.play),
-                     rumps.MenuItem("⏩ Next", callback=self.next),
-                     rumps.MenuItem("⏪ Prev", callback=self.prev),
-                     None,
-                    #  ["Share", [rumps.MenuItem("Song", callback=self.share('song')),
-                    #             rumps.MenuItem("Artist", callback=self.share('artist')),
-                    #             rumps.MenuItem("Album", callback=self.share('album'))]],
-                    #  None,
-                    rumps.MenuItem("Show"),
-                    None,
-                    rumps.MenuItem("Quit", callback=self.quit)]
+                          rumps.MenuItem("⏩ Next", callback=self.next),
+                          rumps.MenuItem("⏪ Prev", callback=self.prev),
+                          None,
+                          #  ["Share", [rumps.MenuItem("Song", callback=self.share('song')),
+                          #             rumps.MenuItem("Artist", callback=self.share('artist')),
+                          #             rumps.MenuItem("Album", callback=self.share('album'))]],
+                          #  None,
+                          rumps.MenuItem("Show"),
+                          None,
+                          rumps.MenuItem("Quit", callback=self.quit)]
         self.closed_menu = [rumps.MenuItem("Open Spotify", icon='resources/sp_icon.png', callback=self.start_spotify),
                             None,
                             rumps.MenuItem("Quit", callback=self.quit)]
         self.menu = self.full_menu
-        self.sp = SpotifyController()
+        try:
+            self.sp = SpotifyController()
+        except SpotifyControllerException:
+            raise SystemError()
 
-    def share(self,_):
+    def share(self, _):
         pass
 
     def start_spotify(self, _):
@@ -34,7 +38,7 @@ class TunesBar(rumps.App):
         self.sp.start_spotify()
         self.menu.clear()
         self.menu = self.full_menu
-        
+
     def play(self, _):
         """
             Toggle spotify to play/pause - update menu item title
@@ -65,4 +69,3 @@ class TunesBar(rumps.App):
     def quit(self, _):
         self.sp.quit()
         rumps.quit_application()
-
