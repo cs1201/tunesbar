@@ -71,3 +71,14 @@ class SpotifyAppleScripts:
                     set foremost to true
                 end tell
             """
+
+    get_info: str  = """
+                    tell application "Spotify"
+                        set r_track to name of current track
+                        set r_artist to artist of current track
+                        set r_album to album of current track
+                        set r_artwork_url to artwork url of current track
+                    end tell
+                    return {r_track, r_artist, r_album, r_artwork_url}
+                    """
+

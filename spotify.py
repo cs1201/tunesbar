@@ -38,12 +38,25 @@ class SpotifyController:
         self.__is_open = self._run_script(self.scripts.start_spotify)
 
     def toggle_playing(self):
-        print("telling spotify to play")
         self._run_script(self.scripts.toggle_play)
+
+    def track_info(self):
+        rtn = applescript.run(self.scripts.get_info).out.split(',')
+        info = dict()
+        if rtn != None:
+            if len(rtn) != 4:
+                rtn = [""] * 4
+            info = {
+                'name': rtn[0],
+                'artist': rtn[1],
+                'album': rtn[2],
+                'artwork_url': rtn[3]
+            }
+        return info
+        
 
     def show(self):
         self._run_script(self.scripts.show)
-        print("ran self.scripts.show")
 
     def quit(self):
         self._run_script(self.scripts._quit)
@@ -56,7 +69,6 @@ class SpotifyController:
             return False
         else:
             raise SpotifyControllerException("Error: unrecognised spotify OSA response")
-
 
 if __name__ == "__main__":
     sp = SpotifyController()
